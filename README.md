@@ -433,9 +433,10 @@ Prevent logs from consuming excessive storage space.
 ```ini
 [Journal]
 Storage=persistent
-SystemMaxUse=10M
-RuntimeMaxUse=10M
-SystemMaxFileSize=2M
+SystemMaxUse=20M
+SystemMaxFileSize=4M
+RuntimeMaxUse=16M
+RuntimeMaxFileSize=4M
 ```
 
 ---
