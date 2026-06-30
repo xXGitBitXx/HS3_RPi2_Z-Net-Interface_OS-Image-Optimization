@@ -136,6 +136,37 @@ sudo systemctl mask apt-daily.timer
 sudo systemctl mask apt-daily-upgrade.service
 sudo systemctl mask apt-daily-upgrade.timer
 ```
+### rsyslog (System Logging Daemon)
+Prevents heavy syslog write cycles from thrashing flash storage, freezing the kernel, or causing prolonged `sync` lockups.
+
+**Option A: Live System Mask**
+
+If the system is currently booted:
+
+```bash
+sudo systemctl mask rsyslog
+```
+
+**Option B: Host System Mask (Offline Method)**
+
+Mount the USB data partition to a host Linux environment to apply a structural mask before booting:
+
+```bash
+# Mount the USB root partition to your host system
+sudo mount /dev/sdX# /mnt/target
+
+# Force systemd to point rsyslog straight to a dead end (/dev/null)
+sudo ln -sf /dev/null /mnt/target/etc/systemd/system/rsyslog.service
+
+# Clean up legacy auto-start symlinks to ensure a clean boot path
+sudo rm -f /mnt/target/etc/systemd/system/multi-user.target.wants/rsyslog.service
+sudo rm -f /mnt/target/etc/rc*.d/S*rsyslog
+
+# Commit the updates to the silicon and unmount cleanly
+sync
+sudo umount /mnt/target
+
+```
 
 ---
 
