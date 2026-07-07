@@ -103,6 +103,14 @@ sudo rm -rf /var/tmp/*
 
 ---
 
+## Remove Legacy Hardware Source Demos
+
+Wipe the proprietary VideoCore GPU code samples. Because this is a headless appliance that functions strictly as a network serial bridge, multimedia test assets and raw H.264 video streams are dead weight.
+
+```bash
+sudo rm -rf /opt/vc/src/hello_pi
+```
+
 ## 1.2 Service Management
 
 ### Mask Services
