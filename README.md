@@ -290,6 +290,8 @@ This file tells the `/etc/rc.local` script:
 
 By checking for this file first, the system avoids unnecessary network requests (`wget`) and disk writes during reboot, helping preserve USB drive lifespan.
 
+Only remove /var/www/Main/uzb.txt if you need ser2net.conf reconfigured for /dev/ttyACM0 (i.e., you're using a UZB device). Its presence tells the script to skip re-detection and leave the existing config alone.
+
 ---
 
 # Phase 2: Filesystem & Partition
