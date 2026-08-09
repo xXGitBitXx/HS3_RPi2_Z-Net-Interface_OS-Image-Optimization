@@ -26,21 +26,21 @@ sudo mkdir -p /var/www/Main
 Download the `ser2net` binary and configuration:
 
 ```bash
-sudo wget -O /etc/ser2net.conf https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/etc/ser2net.conf
-sudo wget -O /bin/ser2net https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/bin/ser2net
+sudo wget -O /etc/ser2net.conf https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/etc/ser2net.conf
+sudo wget -O /bin/ser2net https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/bin/ser2net
 sudo chmod +x /bin/ser2net
 ```
 
 Download the HomeSeer network registration script:
 
 ```bash
-sudo wget -O /usr/local/HomeSeer/register_with_find.sh https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/scripts/register_with_find.sh
+sudo wget -O /usr/local/HomeSeer/register_with_find.sh https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/scripts/register_with_find.sh
 ```
 
 Download the `rc.local` startup script:
 
 ```bash
-sudo wget -O /etc/rc.local https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/etc/rc.local
+sudo wget -O /etc/rc.local https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/etc/rc.local
 ```
 
 After downloading, edit `rc.local` and **remove** the following line:
@@ -60,9 +60,9 @@ sudo sh /var/www/Main/uzb.sh &
 Copy the legacy libraries into place:
 
 ```bash
-sudo wget -O /usr/local/bin/gpio https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/bin/gpio
-sudo wget -O /usr/lib/libwiringPi.so https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/lib/libwiringPi.so
-sudo wget -O /usr/lib/libwiringPiDev.so https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi2_Z-Net-Interface_OS-Image-Optimization/main/lib/libwiringPiDev.so
+sudo wget -O /usr/local/bin/gpio https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/bin/gpio
+sudo wget -O /usr/lib/libwiringPi.so https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/lib/libwiringPi.so
+sudo wget -O /usr/lib/libwiringPiDev.so https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/lib/libwiringPiDev.so
 ```
 
 **Verify after boot** — confirm the dynamic linking succeeded and that `libwiringPi.so` opens correctly:
