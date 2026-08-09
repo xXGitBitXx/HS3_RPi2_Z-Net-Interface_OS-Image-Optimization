@@ -56,11 +56,12 @@ After downloading, edit `rc.local` and **remove** the following line:
 sudo sh /var/www/Main/uzb.sh &
 ```
 
-> **Note:** `uzb.sh detects whether a UZB Z-Wave USB stick is connected and if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0 instead of the GPIO header's primary UART interface (/dev/ttyAMA0).
+> **Note:** `uzb.sh` detects whether a UZB Z-Wave USB stick is connected and if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0 instead of the GPIO header's primary UART interface (/dev/ttyAMA0).
 ```bash
 '2001:raw:0:/dev/ttyACM0:115200 8DATABITS NONE 1STOPBIT -XONXOFF -RTSCTS'
 ```
 > The presence of /var/www/Main/uzb.txt acts as a flag telling the script this has already been done, so it skips re-detection and leaves the existing config alone — avoiding unnecessary network requests and disk writes on reboot.
+> This deployment removes the line rather than relying on it, since ser2net.conf is already downloaded and configured manually in the step above — the auto-detection logic and its dependency on a live download from HomeSeer's server aren't needed here.
 
 ---
 
