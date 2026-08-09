@@ -1,4 +1,4 @@
-# HS3 RPi2 OS Image Optimization
+# HS3 RPi OS Image Optimization
 ## Stripped Raspbian 9 OS for Z-Net Interface
 
 > **Note:** This procedure was engineered because official Raspbian 8 recovery images are no longer provided, requiring custom optimization for legacy Z-Net-only hardware.
