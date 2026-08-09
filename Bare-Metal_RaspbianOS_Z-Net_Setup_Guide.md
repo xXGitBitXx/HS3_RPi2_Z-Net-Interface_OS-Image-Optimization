@@ -49,7 +49,7 @@ After downloading, edit `rc.local` and **remove** the following line:
 sudo sh /var/www/Main/uzb.sh &
 ```
 
-> **Note:** `uzb.sh` is for the official Z-Net web interface, allowing HomeSeer or a browser to query the board's USB status via HTTP. This isn't needed for this deployment.
+> **Note:** `uzb.sh detects whether a UZB Z-Wave USB stick is connected and, if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0. The presence of /var/www/Main/uzb.txt acts as a flag telling the script this has already been done, so it skips re-detection and leaves the existing config alone — avoiding unnecessary network requests and disk writes on reboot.
 
 ---
 
