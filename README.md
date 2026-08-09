@@ -36,6 +36,9 @@ Strip the Raspbian 9 environment to its absolute essentials to fit a 1GB physica
 sudo apt-get purge wolfram-engine
 sudo apt-get purge libreoffice*
 sudo apt-get purge mono-xsp4
+sudo apt purge "mono-*" -y
+sudo rm -f /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt autoremove --purge -y
 ```
 
 ### Dependency Cleanup
