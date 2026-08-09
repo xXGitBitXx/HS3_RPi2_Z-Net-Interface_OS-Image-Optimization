@@ -33,9 +33,6 @@ amixer cset numid=3 1
 # sudo /usr/local/HomeSeer/autostart_hs &
 # echo "HomeSeer is starting..."
 # sudo /usr/local/HomeSeer/register_with_find.sh &
-/usr/local/bin/gpio -g write 2 1
-/usr/local/bin/gpio -g write 3 1
-/usr/local/bin/gpio -g write 4 0
 
 sudo sh /var/www/Main/uzb.sh &
 /usr/local/sbin/ser2net -c /etc/ser2net.conf -n > /dev/null 2>&1 &
