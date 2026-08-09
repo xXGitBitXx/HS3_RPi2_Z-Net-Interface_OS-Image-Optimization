@@ -1,4 +1,4 @@
-# Bare-Metal_RaspbianOS_Z-Net_Setup_Guide
+# Bare-Metal RaspbianOS Z-Net Setup_Guide
 
 This document outlines the manual steps required to convert a fresh RaspbianOS install onto a microSD card into a dedicated, read-only, Z-Net interface.
 
