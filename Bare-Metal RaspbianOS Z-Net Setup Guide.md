@@ -27,7 +27,7 @@ sudo mkdir -p /var/www/Main
 
 Choose your parent directory.
 
-Download the `ser2net` binary and configuration:
+Download the `ser2net` binary and `ser2net.conf`:
 
 ```bash
 sudo wget -O /etc/ser2net.conf https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/etc/ser2net.conf
@@ -50,18 +50,35 @@ Download the `rc.local` startup script:
 sudo wget -O /etc/rc.local https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/etc/rc.local
 ```
 
-After downloading, edit `rc.local` and **remove** the following line:
+After downloading, edit `rc.local` and remove / add the following lines:
+
+**Remove**
 
 ```bash
+15: sleep 5
+28 /usr/local/HomeSeer/led.sh yellow
+30: /var/www/Main/checkkb
+35: /usr/local/HomeSeer/led.sh blue
+37: sudo sh /var/www/Main/uzb.sh &
+46: echo ""
 sudo sh /var/www/Main/uzb.sh &
 ```
 
-> **Note:** `uzb.sh` detects whether a UZB Z-Wave USB stick is connected and if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0 instead of the GPIO header's primary UART interface (/dev/ttyAMA0).
+**Add**
+
+```bash
+20: # Configure BCM pins 2, 3, 4 (RGB status LED) as outputs
+24: # Set initial LED state: pins 3 & 4 HIGH (off, active-low), pin 2 LOW (red on)
+36: # echo "HomeSeer is starting..."
+```
+
+> **Note:** `/var/www/Main/uzb.sh` detects whether a UZB Z-Wave USB stick is connected and if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0 instead of the GPIO header's primary UART interface (/dev/ttyAMA0).
 ```bash
 '2001:raw:0:/dev/ttyACM0:115200 8DATABITS NONE 1STOPBIT -XONXOFF -RTSCTS'
 ```
 > The presence of /var/www/Main/uzb.txt acts as a flag telling the script this has already been done, so it skips re-detection and leaves the existing config alone — avoiding unnecessary network requests and disk writes on reboot.
-> This deployment removes the line rather than relying on it, since ser2net.conf is already downloaded and configured manually in the step above — the auto-detection logic and its dependency on a live download from HomeSeer's server aren't needed here.
+>
+> This deployment removes the line rather than relying on it, since ser2net.conf is already downloaded and configured in the step above — the auto-detection logic and its dependency on a live download from HomeSeer's server aren't needed here.
 
 ---
 
