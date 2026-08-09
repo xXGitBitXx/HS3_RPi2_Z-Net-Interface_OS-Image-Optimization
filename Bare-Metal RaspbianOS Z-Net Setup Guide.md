@@ -90,6 +90,19 @@ root=PARTUUID=<EDIT>-02 ro, rootwait, noswap
 
 ```
 PARTUUID=<EDITED>-02 /    ext4    ro,noatime
+
+# Move high-write system and logging directories into RAM (tmpfs)
+tmpfs           /tmp            tmpfs   defaults,noatime,nosuid,size=30M    0       0
+tmpfs           /var/tmp        tmpfs   defaults,noatime,nosuid,size=10M     0       0
+tmpfs           /var/log        tmpfs   defaults,noatime,nosuid,mode=0755,size=10M  0  0
+tmpfs           /var/spool      tmpfs   defaults,noatime,nosuid,size=10M     0       0
+```
+
+**Modify `/etc/rc.local`** — since `/var/log` is now a `tmpfs` mount (wiped on every reboot), add the following just before `exit 0` to recreate required log directories and permissions:
+
+```bash
+mkdir -p /var/log/apt
+chmod 755 /var/log/*
 ```
 
 ---
