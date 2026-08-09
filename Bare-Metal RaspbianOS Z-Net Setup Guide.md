@@ -2,6 +2,8 @@
 
 This document outlines the manual steps required to convert a fresh RaspbianOS install onto a microSD card into a dedicated, read-only, Z-Net interface.
 
+[Raspbian Lite 2019 Image](http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-04-09/)
+
 ---
 
 ## 1. Initial Mount & SSH Configuration
@@ -23,11 +25,16 @@ sudo mkdir -p /usr/local/HomeSeer
 sudo mkdir -p /var/www/Main
 ```
 
+Choose your parent directory.
+
 Download the `ser2net` binary and configuration:
 
 ```bash
 sudo wget -O /etc/ser2net.conf https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/etc/ser2net.conf
 sudo wget -O /bin/ser2net https://raw.githubusercontent.com/xXGitBitXx/HS3_RPi_Z-Net-Interface_OS-Image-Optimization/main/bin/ser2net
+```
+
+```bash
 sudo chmod +x /bin/ser2net
 ```
 
@@ -49,7 +56,11 @@ After downloading, edit `rc.local` and **remove** the following line:
 sudo sh /var/www/Main/uzb.sh &
 ```
 
-> **Note:** `uzb.sh detects whether a UZB Z-Wave USB stick is connected and, if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0. The presence of /var/www/Main/uzb.txt acts as a flag telling the script this has already been done, so it skips re-detection and leaves the existing config alone — avoiding unnecessary network requests and disk writes on reboot.
+> **Note:** `uzb.sh detects whether a UZB Z-Wave USB stick is connected and if so, reconfigures /etc/ser2net.conf to point at /dev/ttyACM0 instead of the GPIO header's primary UART interface (/dev/ttyAMA0).
+```bash
+'2001:raw:0:/dev/ttyACM0:115200 8DATABITS NONE 1STOPBIT -XONXOFF -RTSCTS'
+```
+> The presence of /var/www/Main/uzb.txt acts as a flag telling the script this has already been done, so it skips re-detection and leaves the existing config alone — avoiding unnecessary network requests and disk writes on reboot.
 
 ---
 
